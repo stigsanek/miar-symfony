@@ -8,9 +8,18 @@ Encore
     .setOutputPath('public/build/')
     .setPublicPath('/build')
     .addEntry('app', './assets/index.js')
+    .enablePostCssLoader((options) => {
+        options.config = {
+            path: './postcss.config.js'
+        };
+    })
     .splitEntryChunks()
     .enableSingleRuntimeChunk()
     .cleanupOutputBeforeBuild()
+    .copyFiles({
+        from: './assets/favicons',
+        to: 'favicons/[name].[ext]'
+    })
     .enableBuildNotifications()
     .enableSourceMaps(!Encore.isProduction())
     .enableVersioning(Encore.isProduction())
