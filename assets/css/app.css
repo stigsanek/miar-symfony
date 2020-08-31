@@ -37,3 +37,7 @@
 .fill-body {
   fill: #212529;
 }
+
+.fill-alert-danger {
+  fill: #721c24;
+}
