@@ -33,3 +33,7 @@
 .bootstrap-select > .disabled {
   cursor: auto;
 }
+
+.fill-body {
+  fill: #212529;
+}

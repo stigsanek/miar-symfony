@@ -8,7 +8,12 @@
 	<div class="container-fluid h-100 text-center bg-light">
 		<div class="row h-100 justify-content-center align-items-center">
 			<form class="col-sm-8 col-md-6 col-lg-4 col-xl-3" method="post" novalidate>
-				<h2 class="h1 mb-4">МиАР</h2>
+				<h2 class="d-flex justify-content-center align-items-center h1 mb-4">
+					<svg class="mr-2 fill-body" width="2.5rem" height="2.5rem">
+						<use xlink:href="#svg-database"></use>
+					</svg>
+					<span>МиАР</span>
+				</h2>
 				<div class="form-group">
 					<label class="sr-only" for="inputUsername">Логин</label>
 					<input class="form-control" type="text" value="{{ last_username }}" name="username" id="inputUsername" placeholder="Логин" autofocus>
