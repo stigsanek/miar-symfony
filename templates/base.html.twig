@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-		<title>{% block title %}МиАР{% endblock %}</title>
+		<title>{% block title %}{{ title }} · МиАР{% endblock %}</title>
 		{% block stylesheets %}
 			{{ encore_entry_link_tags('app') }}
 			<link rel="apple-touch-icon" sizes="180x180" href="build/favicons/apple-touch-icon.png">
@@ -12,7 +12,7 @@
 			<link rel="icon" type="image/png" sizes="16x16" href="build/favicons/favicon-16x16.png">
 		{% endblock %}
 	</head>
-	<body>
+	<body class="d-flex flex-column h-100">
 		{% block body %}{% endblock %}
 		{% block javascripts %}
 			{{ encore_entry_script_tags('app') }}

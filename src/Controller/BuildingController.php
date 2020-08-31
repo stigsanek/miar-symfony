@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class BuildingController extends AbstractController
 {
     /**
-     * @Route("/building", name="building")
+     * @Route("/buildings", name="buildings")
      */
     public function index()
     {
