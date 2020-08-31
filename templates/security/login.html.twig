@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Авторизация · МиАР{% endblock %}
+
+{% block body %}
+	<h1 class="sr-only">Авторизация</h1>
+	{% if error %}
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <p class="mb-0">{{ error.messageKey|trans(error.messageData, 'security') }}</p>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Закрыть">
+          <svg class="fill-alert-danger" style="width: 1rem; height: 1rem;">
+						<use xlink:href="#svg-times"></use>
+					</svg>
+      </button>
+    </div>
+	{% endif %}
+	<div class="bg-light h-100">
+		<div class="container h-100 text-center">
+			<div class="row h-100 justify-content-center align-items-center">
+				<form class="col-sm-8 col-md-6 col-xl-4" method="post" novalidate>
+					<h2 class="d-flex justify-content-center align-items-center h1 mb-4">
+						<svg class="mr-2 fill-body" style="width: 2.5rem; height: 2.5rem;">
+							<use xlink:href="#svg-database"></use>
+						</svg>
+						<span>МиАР</span>
+					</h2>
+					<div class="form-group">
+						<label class="sr-only" for="inputUsername">Логин</label>
+						<input class="form-control" type="text" value="{{ last_username }}" name="username" id="inputUsername" placeholder="Логин" autofocus>
+					</div>
+					<div class="form-group">
+						<label class="sr-only" for="inputPassword">Пароль</label>
+						<input class="form-control" type="password" name="password" id="inputPassword" placeholder="Пароль">
+						<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+					</div>
+					<div class="form-group">
+						<label class="sr-only" for="database">База данных</label>
+						<select class="form-control selectpicker" id="database" name="database">
+							<option value="" selected disabled>Выберите базу данных</option>
+							<option value="plots">Земельные участки</option>
+							<option value="buildings">Объекты капитального строительства</option>
+						</select>
+					</div>
+					<div class="form-group mb-4">
+						<button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
+					</div>
+					<p class="text-muted">&copy; 2020 АС Мониторинг и анализ рынка</p>
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock %}

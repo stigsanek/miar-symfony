@@ -1,0 +1,43 @@
+.form-control:disabled,
+.form-control[readonly] {
+  -webkit-text-fill-color: #495057;
+}
+
+.bootstrap-select.form-control {
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+}
+
+.bootstrap-select.form-control.is-invalid {
+  border-color: #dc3545;
+}
+
+.bootstrap-select > .btn-light.dropdown-toggle,
+.bootstrap-select > .btn-light.dropdown-toggle:active,
+.bootstrap-select > .btn-light.dropdown-toggle:focus,
+.bootstrap-select > .btn-light.dropdown-toggle:hover,
+.bootstrap-select > .show > .btn-light.dropdown-toggle {
+  background-color: #ffffff;
+  border: none;
+  color: #495057;
+}
+
+.bootstrap-select > .btn-light.dropdown-toggle.disabled,
+.bootstrap-select > .btn-light.dropdown-toggle.disabled:focus {
+  opacity: 1;
+  background-color: #e9ecef;
+  box-shadow: none;
+}
+
+.bootstrap-select.disabled,
+.bootstrap-select > .disabled {
+  cursor: auto;
+}
+
+.fill-body {
+  fill: #212529;
+}
+
+.fill-alert-danger {
+  fill: #721c24;
+}
