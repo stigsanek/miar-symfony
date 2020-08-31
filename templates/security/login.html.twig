@@ -6,13 +6,13 @@
 	<h1 class="sr-only">Авторизация</h1>
 	{% if error %}
 		<div class="alert alert-danger alert-dismissible fade show" role="alert">
-      <p class="mb-0">{{ error.messageKey|trans(error.messageData, 'security') }}</p>
-      <button type="button" class="close" data-dismiss="alert" aria-label="Закрыть">
-          <svg class="fill-alert-danger" style="width: 1rem; height: 1rem;">
-						<use xlink:href="#svg-times"></use>
-					</svg>
-      </button>
-    </div>
+			<p class="mb-0">{{ error.messageKey|trans(error.messageData, 'security') }}</p>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Закрыть">
+				<svg class="fill-alert-danger" style="width: 1rem; height: 1rem;">
+					<use xlink:href="#svg-times"></use>
+				</svg>
+			</button>
+		</div>
 	{% endif %}
 	<div class="bg-light h-100">
 		<div class="container h-100 text-center">
@@ -44,7 +44,10 @@
 					<div class="form-group mb-4">
 						<button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
 					</div>
-					<p class="text-muted">&copy; 2020 АС Мониторинг и анализ рынка</p>
+					<p class="text-muted">
+            {{ include('partials/_copy.html.twig') }}
+            {{ include('partials/_version.html.twig') }}
+          </p>
 				</form>
 			</div>
 		</div>
