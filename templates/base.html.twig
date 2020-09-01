@@ -7,9 +7,10 @@
 		<title>{% block title %}{% endblock %}</title>
 		{% block stylesheets %}
 			{{ encore_entry_link_tags('app') }}
-			<link rel="apple-touch-icon" sizes="180x180" href="build/favicons/apple-touch-icon.png">
-			<link rel="icon" type="image/png" sizes="32x32" href="build/favicons/favicon-32x32.png">
-			<link rel="icon" type="image/png" sizes="16x16" href="build/favicons/favicon-16x16.png">
+			<link rel="apple-touch-icon" sizes="180x180" href="/build/favicons/apple-touch-icon.png">
+			<link rel="icon" type="image/png" sizes="32x32" href="/build/favicons/favicon-32x32.png">
+			<link rel="icon" type="image/png" sizes="16x16" href="/build/favicons/favicon-16x16.png">
+      <link rel="manifest" href="/build/favicons/site.webmanifest">
 		{% endblock %}
 	</head>
 	<body class="d-flex flex-column h-100">
