@@ -100,8 +100,8 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         //     return new RedirectResponse($targetPath);
         // }
         if (!$this->user->getPasswordStatus()) {
-            $flash = MessageStore::getWarningChangePassword();
-            $request->getSession()->getFlashBag()->add($flash['type'], $flash['msg']);
+            list($flashType, $flashMsg) = MessageStore::getWarningChangePassword();
+            $request->getSession()->getFlashBag()->add($flashType, $flashMsg);
         }
 
         $url = $request->get('database') ?? 'get_info';

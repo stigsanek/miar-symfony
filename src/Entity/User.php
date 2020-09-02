@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -21,32 +23,52 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\NotBlank
      */
     private $username;
 
     /**
      * @ORM\Column(type="json")
+     * @Assert\NotBlank
      */
     private $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\NotBlank
+     * @Assert\Length(min=8, max=4096)
+     * @Assert\Regex("/(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])/")
      */
     private $password;
 
     /**
+     * @SecurityAssert\UserPassword
+     */
+    private $currentPassword;
+
+    /**
+     * @Assert\NotBlank
+     * @Assert\Length(min=8, max=4096)
+     * @Assert\Regex("/(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])/")
+     */
+    private $plainPassword;
+
+    /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank
      */
     private $passwordStatus;
 
@@ -97,9 +119,33 @@ class User implements UserInterface
         return (string) $this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(?string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    public function getCurrentPassword(): string
+    {
+        return (string) $this->currentPassword;
+    }
+
+    public function setCurrentPassword(?string $password): self
+    {
+        $this->currentPassword = $password;
+
+        return $this;
+    }
+
+    public function getPlainPassword(): string
+    {
+        return (string) $this->plainPassword;
+    }
+
+    public function setPlainPassword(?string $password): self
+    {
+        $this->plainPassword = $password;
 
         return $this;
     }
