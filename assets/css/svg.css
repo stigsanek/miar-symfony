@@ -1,0 +1,87 @@
+.fill-text-primary {
+  fill: #007bff;
+}
+
+.fill-text-secondary {
+  fill: #6c757d;
+}
+
+.fill-text-success {
+  fill: #28a745;
+}
+
+.fill-text-danger {
+  fill: #dc3545;
+}
+
+.fill-text-warning {
+  fill: #ffc107;
+}
+
+.fill-text-info {
+  fill: #17a2b8;
+}
+
+.fill-text-light {
+  fill: #f8f9fa;
+}
+
+.fill-text-dark {
+  fill: #343a40;
+}
+
+.fill-text-body {
+  fill: #212529;
+}
+
+.fill-text-white {
+  fill: #ffffff;
+}
+
+.fill-alert-primary {
+  fill: #004085;
+}
+
+.fill-alert-secondary {
+  fill: #383d41;
+}
+
+.fill-alert-success {
+  fill: #155724;
+}
+
+.fill-alert-danger {
+  fill: #721c24;
+}
+
+.fill-alert-warning {
+  fill: #856404;
+}
+
+.fill-alert-info {
+  fill: #0c5460;
+}
+
+.fill-alert-light {
+  fill: #818182;
+}
+
+.fill-alert-dark {
+  fill: #1b1e21;
+}
+
+.fill-navbar {
+  fill: rgba(255, 255, 255, 0.5)
+}
+
+.nav-link:focus .fill-text-primary, .nav-link:hover .fill-text-primary {
+  fill: #0056b3;
+}
+
+.nav-link:focus .fill-navbar, .nav-link:hover .fill-navbar {
+  fill: rgba(255, 255, 255, 0.75)
+}
+
+.nav-item.show .fill-navbar, .nav-item.active .fill-navbar, .nav-item.active .nav-link:focus .fill-navbar, .nav-item.active .nav-link:hover .fill-navbar {
+  fill: #ffffff;
+}

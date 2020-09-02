@@ -1,20 +1,33 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout/layout.html.twig' %}
 
-{% block title %}Hello ProfileController!{% endblock %}
+{% block title %}Профиль пользователя · МиАР{% endblock %}
+{% block nav_profile %}	active{% endblock %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/aleksandregorov/Desktop/Projects/miar-symfony/src/Controller/ProfileController.php'|file_link(0) }}">src/Controller/ProfileController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/aleksandregorov/Desktop/Projects/miar-symfony/templates/profile/index.html.twig'|file_link(0) }}">templates/profile/index.html.twig</a></code></li>
-    </ul>
-</div>
+{% block content %}
+	<h1 class="sr-only">Профиль пользователя</h1>
+	<div class="row">
+		<aside class="col-12 col-md-4 col-xl-3 mb-3">
+			<ul class="nav card">
+				<li class="nav-item">
+					<a class="nav-link" href="/profile/info">
+						<svg class="mr-1 mt-n1 fill-text-primary" width="1em" height="1em">
+							<use xlink:href="#svg-info-circle"></use>
+						</svg>
+						<span>Информация</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">
+						<svg class="mr-1 mt-n1 fill-text-primary" width="1em" height="1em">
+							<use xlink:href="#svg-shield-alt"></use>
+						</svg>
+						<span>Безопасноть</span>
+					</a>
+				</li>
+			</ul>
+		</aside>
+		<section class="col-12 col-md-8 col-xl-9">
+			{% block section %}{% endblock %}
+		</section>
+	</div>
 {% endblock %}
