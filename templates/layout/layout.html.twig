@@ -1,29 +1,29 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	{# Header start #}
-	<header class="fixed-top">
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+{# Header start #}
+  <header class="fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
       <div class="navbar-brand d-flex align-items-center mb-0 h1">
         <svg class="mr-2 fill-text-white" width="1em" height="1em">
           <use xlink:href="#svg-database"></use>
         </svg>
         <span>МиАР</span>
       </div>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Переключатель навигации">
-				<svg class="mt-n1 fill-text-white" width="1em" height="1em">
-					<use xlink:href="#svg-bars"></use>
-				</svg>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Переключатель навигации">
+        <svg class="mt-n1 fill-text-white" width="1em" height="1em">
+          <use xlink:href="#svg-bars"></use>
+        </svg>
       </button>
-			<div class="collapse navbar-collapse" id="menu">
-				<ul class="navbar-nav">
-					<li class="nav-item dropdown{% block nav_database %}{% endblock %}">
+      <div class="collapse navbar-collapse" id="menu">
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown{% block nav_database %}{% endblock %}">
 						<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-              <svg class="mr-1 mt-n1 fill-navbar" width="1em" height="1em">
-                <use xlink:href="#svg-server"></use>
-              </svg>
-              <span>База данных</span>
-            </a>
+							<svg class="mr-1 mt-n1 fill-navbar" width="1em" height="1em">
+								<use xlink:href="#svg-server"></use>
+							</svg>
+							<span>База данных</span>
+						</a>
 						<div class="dropdown-menu">
 							<a class="dropdown-item" href="/plots">Земельные участки</a>
 							<a class="dropdown-item" href="/buildings">Объекты капитального строительства</a>
@@ -32,11 +32,11 @@
 					{% if not is_granted('ROLE_GUEST') %}
 						<li class="nav-item dropdown{% block nav_new %}{% endblock %}">
 							<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                <svg class="mr-1 mt-n1 fill-navbar" width="1em" height="1em">
-                  <use xlink:href="#svg-plus"></use>
-                </svg>
-                <span>Добавить объект</span>
-              </a>
+								<svg class="mr-1 mt-n1 fill-navbar" width="1em" height="1em">
+									<use xlink:href="#svg-plus"></use>
+								</svg>
+								<span>Добавить объект</span>
+							</a>
 							<div class="dropdown-menu">
 								<a class="dropdown-item" href="/plots/new">Земельный участок</a>
 								<a class="dropdown-item" href="/buildings/new">Объект капитального строительства</a>
@@ -46,30 +46,30 @@
 					{% if is_granted('ROLE_ADMIN') %}
 						<li class="nav-item{% block nav_admin %}{% endblock %}">
 							<a class="nav-link" href="/admin">
-                <svg class="mr-1 mt-n1 fill-navbar" width="1em" height="1em">
-                  <use xlink:href="#svg-cog"></use>
-                </svg>
-                <span>Панель администратора</span>
-              </a>
+								<svg class="mr-1 mt-n1 fill-navbar" width="1em" height="1em">
+									<use xlink:href="#svg-cog"></use>
+								</svg>
+								<span>Панель администратора</span>
+							</a>
 						</li>
 					{% endif %}
 				</ul>
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item{% block nav_profile %}{% endblock %}">
 						<a class="nav-link" href="/profile/info">
-              <svg class="mr-1 mt-n1 fill-navbar" width="1em" height="1em">
-                <use xlink:href="#svg-user-alt"></use>
-              </svg>
-              <span>{{ app.user.username }}</span>
-            </a>
+							<svg class="mr-1 mt-n1 fill-navbar" width="1em" height="1em">
+								<use xlink:href="#svg-user-alt"></use>
+							</svg>
+							<span>{{ app.user.username }}</span>
+						</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="/logout">
-              <svg class="mr-1 mt-n1 fill-navbar" width="1em" height="1em">
-                <use xlink:href="#svg-sign-out-alt"></use>
-              </svg>
-              <span>Выйти</span>
-            </a>
+							<svg class="mr-1 mt-n1 fill-navbar" width="1em" height="1em">
+								<use xlink:href="#svg-sign-out-alt"></use>
+							</svg>
+							<span>Выйти</span>
+						</a>
 					</li>
 				</ul>
 			</div>
@@ -83,7 +83,7 @@
 			{% for label, messages in app.flashes %}
 				{% for message in messages %}
 					<div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
-						<p class="mb-0">{{ message }}</p>
+						<p class="mb-0">{{ message|raw }}</p>
 						<button type="button" class="close" data-dismiss="alert" aria-label="Закрыть">
 							<svg class="mt-n1 fill-alert-{{ label }}" width="1em" height="1em">
 								<use xlink:href="#svg-times"></use>
