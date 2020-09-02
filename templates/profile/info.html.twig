@@ -1,0 +1,20 @@
+{% extends 'profile/index.html.twig' %}
+
+{% block section %}
+	<h2 class="h3 mb-4">Информация</h2>
+	<section>
+		<h3 class="h5 mb-4">Общие сведения</h3>
+    <p>
+      <span>Логин:</span>
+			<span class="font-weight-bold">{{ user.username }}</span>
+		</p>
+		<p>
+      <span>Имя:</span>
+			<span class="font-weight-bold">{{ user.firstName }}</span>
+		</p>
+    <p>
+      <span>Фамилия:</span>
+			<span class="font-weight-bold">{{ user.lastName }}</span>
+		</p>
+	</section>
+{% endblock %}

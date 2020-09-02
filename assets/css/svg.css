@@ -74,6 +74,10 @@
   fill: rgba(255, 255, 255, 0.5)
 }
 
+.nav-link:focus .fill-text-primary, .nav-link:hover .fill-text-primary {
+  fill: #0056b3;
+}
+
 .nav-link:focus .fill-navbar, .nav-link:hover .fill-navbar {
   fill: rgba(255, 255, 255, 0.75)
 }
