@@ -3,6 +3,7 @@
 namespace App\Security;
 
 use App\Entity\User;
+use App\Service\MessageStore;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,6 +31,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     private $urlGenerator;
     private $csrfTokenManager;
     private $passwordEncoder;
+    private $user;
 
     public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
     {
@@ -74,6 +76,8 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
             throw new CustomUserMessageAuthenticationException('Username could not be found.');
         }
 
+        $this->user = $user;
+
         return $user;
     }
 
@@ -95,8 +99,12 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         // if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
         //     return new RedirectResponse($targetPath);
         // }
+        if (!$this->user->getPasswordStatus()) {
+            $flash = MessageStore::getWarningChangePassword();
+            $request->getSession()->getFlashBag()->add($flash['type'], $flash['msg']);
+        }
 
-        $url = $request->get('database') ?? 'profile';
+        $url = $request->get('database') ?? 'info';
 
         return new RedirectResponse($this->urlGenerator->generate($url));
         //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
