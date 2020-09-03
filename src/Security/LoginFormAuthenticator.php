@@ -104,7 +104,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
             $request->getSession()->getFlashBag()->add($flashType, $flashMsg);
         }
 
-        $url = $request->get('database') ?? 'get_info';
+        $url = $request->get('database') ?? 'profile_info';
 
         return new RedirectResponse($this->urlGenerator->generate($url));
         //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);

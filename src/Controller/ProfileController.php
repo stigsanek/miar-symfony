@@ -16,7 +16,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class ProfileController extends AbstractController
 {
     /**
-     * @Route("/info", name="get_info")
+     * @Route("/info", name="profile_info")
      */
     public function getInfo()
     {
@@ -26,7 +26,7 @@ class ProfileController extends AbstractController
     }
 
     /**
-     * @Route("/security", name="change_password")
+     * @Route("/security", name="profile_security")
      */
     public function changePassword(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
