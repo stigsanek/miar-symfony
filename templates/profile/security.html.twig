@@ -1,0 +1,28 @@
+{% extends 'profile/index.html.twig' %}
+
+{% block section %}
+	<h2 class="h3 mb-4">Безопасность</h2>
+	{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+	<h3 class="h5 mb-4">Изменение пароля</h3>
+	<div class="form-row">
+		<div class="col-12 col-sm-6 col-xl-3">
+			{{ form_row(form.currentPassword) }}
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="col-12 col-sm-6 col-xl-3">
+			{{ form_row(form.plainPassword.first) }}
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="col-12 col-sm-6 col-xl-3">
+			{{ form_row(form.plainPassword.second) }}
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="form-group col-auto">
+			<button class="btn btn-primary" type="submit">Изменить</button>
+		</div>
+	</div>
+	{{ form_end(form) }}
+{% endblock %}

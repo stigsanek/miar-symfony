@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class PlotController extends AbstractController
 {
     /**
-     * @Route("/plots", name="plots")
+     * @Route("/plots", name="plot_index")
      */
     public function index()
     {

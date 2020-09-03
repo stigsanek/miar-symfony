@@ -26,3 +26,15 @@
 .bootstrap-select.disabled, .bootstrap-select>.disabled {
   cursor: auto;
 }
+
+.bootstrap-select .dropdown-toggle:after {
+  margin-top: 0;
+}
+
+.dropdown-toggle:after {
+  margin-left: 0.235em;
+  vertical-align: 0.235em;
+  border-top: .32em solid;
+  border-right: .32em solid transparent;
+  border-left: .32em solid transparent;
+}
