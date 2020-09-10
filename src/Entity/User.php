@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use App\Validator\Constraints as AppValidator;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -73,6 +75,16 @@ class User implements UserInterface
      * @Assert\NotBlank
      */
     private $passwordStatus;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Plot::class, mappedBy="userId")
+     */
+    private $plots;
+
+    public function __construct()
+    {
+        $this->plots = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -201,6 +213,37 @@ class User implements UserInterface
     public function setPasswordStatus(int $passwordStatus): self
     {
         $this->passwordStatus = $passwordStatus;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Plot[]
+     */
+    public function getPlots(): Collection
+    {
+        return $this->plots;
+    }
+
+    public function addPlot(Plot $plot): self
+    {
+        if (!$this->plots->contains($plot)) {
+            $this->plots[] = $plot;
+            $plot->setUserId($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlot(Plot $plot): self
+    {
+        if ($this->plots->contains($plot)) {
+            $this->plots->removeElement($plot);
+            // set the owning side to null (unless already changed)
+            if ($plot->getUserId() === $this) {
+                $plot->setUserId(null);
+            }
+        }
 
         return $this;
     }
