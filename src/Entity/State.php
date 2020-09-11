@@ -14,7 +14,7 @@ class State
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -25,7 +25,7 @@ class State
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Plot::class, mappedBy="stateId")
+     * @ORM\OneToMany(targetEntity=Plot::class, mappedBy="state")
      */
     private $plots;
 
@@ -63,7 +63,7 @@ class State
     {
         if (!$this->plots->contains($plot)) {
             $this->plots[] = $plot;
-            $plot->setStateId($this);
+            $plot->setState($this);
         }
 
         return $this;
@@ -74,8 +74,8 @@ class State
         if ($this->plots->contains($plot)) {
             $this->plots->removeElement($plot);
             // set the owning side to null (unless already changed)
-            if ($plot->getStateId() === $this) {
-                $plot->setStateId(null);
+            if ($plot->getState() === $this) {
+                $plot->setState(null);
             }
         }
 

@@ -14,7 +14,7 @@ class District
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -30,7 +30,7 @@ class District
     private $cadastralCode;
 
     /**
-     * @ORM\OneToMany(targetEntity=Plot::class, mappedBy="districtId")
+     * @ORM\OneToMany(targetEntity=Plot::class, mappedBy="district")
      */
     private $plots;
 
@@ -80,7 +80,7 @@ class District
     {
         if (!$this->plots->contains($plot)) {
             $this->plots[] = $plot;
-            $plot->setDistrictId($this);
+            $plot->setDistrict($this);
         }
 
         return $this;
@@ -91,8 +91,8 @@ class District
         if ($this->plots->contains($plot)) {
             $this->plots->removeElement($plot);
             // set the owning side to null (unless already changed)
-            if ($plot->getDistrictId() === $this) {
-                $plot->setDistrictId(null);
+            if ($plot->getDistrict() === $this) {
+                $plot->setDistrict(null);
             }
         }
 

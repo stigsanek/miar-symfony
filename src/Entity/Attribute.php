@@ -14,7 +14,7 @@ class Attribute
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -25,7 +25,7 @@ class Attribute
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Plot::class, mappedBy="attributeId")
+     * @ORM\OneToMany(targetEntity=Plot::class, mappedBy="attribute")
      */
     private $plots;
 
@@ -63,7 +63,7 @@ class Attribute
     {
         if (!$this->plots->contains($plot)) {
             $this->plots[] = $plot;
-            $plot->setAttributeId($this);
+            $plot->setAttribute($this);
         }
 
         return $this;
@@ -74,8 +74,8 @@ class Attribute
         if ($this->plots->contains($plot)) {
             $this->plots->removeElement($plot);
             // set the owning side to null (unless already changed)
-            if ($plot->getAttributeId() === $this) {
-                $plot->setAttributeId(null);
+            if ($plot->getAttribute() === $this) {
+                $plot->setAttribute(null);
             }
         }
 

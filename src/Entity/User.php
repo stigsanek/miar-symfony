@@ -20,7 +20,7 @@ class User implements UserInterface
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -77,13 +77,19 @@ class User implements UserInterface
     private $passwordStatus;
 
     /**
-     * @ORM\OneToMany(targetEntity=Plot::class, mappedBy="userId")
+     * @ORM\OneToMany(targetEntity=Plot::class, mappedBy="performerUser")
      */
     private $plots;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Plot::class, mappedBy="lastSavePerformerUser")
+     */
+    private $lastSavePlots;
 
     public function __construct()
     {
         $this->plots = new ArrayCollection();
+        $this->lastSavePlots = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -229,7 +235,7 @@ class User implements UserInterface
     {
         if (!$this->plots->contains($plot)) {
             $this->plots[] = $plot;
-            $plot->setUserId($this);
+            $plot->setPerformerUser($this);
         }
 
         return $this;
@@ -240,8 +246,39 @@ class User implements UserInterface
         if ($this->plots->contains($plot)) {
             $this->plots->removeElement($plot);
             // set the owning side to null (unless already changed)
-            if ($plot->getUserId() === $this) {
-                $plot->setUserId(null);
+            if ($plot->getPerformerUser() === $this) {
+                $plot->setPerformerUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Plot[]
+     */
+    public function getLastSavePlots(): Collection
+    {
+        return $this->lastSavePlots;
+    }
+
+    public function addLastSavePlot(Plot $lastSavePlot): self
+    {
+        if (!$this->lastSavePlots->contains($lastSavePlot)) {
+            $this->lastSavePlots[] = $lastSavePlot;
+            $lastSavePlot->setLastSavePerformerUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLastSavePlot(Plot $lastSavePlot): self
+    {
+        if ($this->lastSavePlots->contains($lastSavePlot)) {
+            $this->lastSavePlots->removeElement($lastSavePlot);
+            // set the owning side to null (unless already changed)
+            if ($lastSavePlot->getLastSavePerformerUser() === $this) {
+                $lastSavePlot->setLastSavePerformerUser(null);
             }
         }
 

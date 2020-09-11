@@ -14,7 +14,7 @@ class Category
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -25,7 +25,7 @@ class Category
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Plot::class, mappedBy="categoryId")
+     * @ORM\OneToMany(targetEntity=Plot::class, mappedBy="category")
      */
     private $plots;
 
@@ -63,7 +63,7 @@ class Category
     {
         if (!$this->plots->contains($plot)) {
             $this->plots[] = $plot;
-            $plot->setCategoryId($this);
+            $plot->setCategory($this);
         }
 
         return $this;
@@ -74,8 +74,8 @@ class Category
         if ($this->plots->contains($plot)) {
             $this->plots->removeElement($plot);
             // set the owning side to null (unless already changed)
-            if ($plot->getCategoryId() === $this) {
-                $plot->setCategoryId(null);
+            if ($plot->getCategory() === $this) {
+                $plot->setCategory(null);
             }
         }
 

@@ -14,7 +14,7 @@ class Bell
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -25,7 +25,7 @@ class Bell
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Plot::class, mappedBy="bellId")
+     * @ORM\OneToMany(targetEntity=Plot::class, mappedBy="bell")
      */
     private $plots;
 
@@ -63,7 +63,7 @@ class Bell
     {
         if (!$this->plots->contains($plot)) {
             $this->plots[] = $plot;
-            $plot->setBellId($this);
+            $plot->setBell($this);
         }
 
         return $this;
@@ -74,8 +74,8 @@ class Bell
         if ($this->plots->contains($plot)) {
             $this->plots->removeElement($plot);
             // set the owning side to null (unless already changed)
-            if ($plot->getBellId() === $this) {
-                $plot->setBellId(null);
+            if ($plot->getBell() === $this) {
+                $plot->setBell(null);
             }
         }
 

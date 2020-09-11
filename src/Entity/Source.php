@@ -14,7 +14,7 @@ class Source
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -25,7 +25,7 @@ class Source
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Plot::class, mappedBy="sourceId")
+     * @ORM\OneToMany(targetEntity=Plot::class, mappedBy="source")
      */
     private $plots;
 
@@ -63,7 +63,7 @@ class Source
     {
         if (!$this->plots->contains($plot)) {
             $this->plots[] = $plot;
-            $plot->setSourceId($this);
+            $plot->setSource($this);
         }
 
         return $this;
@@ -74,8 +74,8 @@ class Source
         if ($this->plots->contains($plot)) {
             $this->plots->removeElement($plot);
             // set the owning side to null (unless already changed)
-            if ($plot->getSourceId() === $this) {
-                $plot->setSourceId(null);
+            if ($plot->getSource() === $this) {
+                $plot->setSource(null);
             }
         }
 

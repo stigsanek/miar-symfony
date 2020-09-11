@@ -14,7 +14,7 @@ class Classifier
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -25,17 +25,17 @@ class Classifier
     private $name;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", precision=20, scale=10)
      */
     private $minPrice;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", precision=20, scale=10)
      */
     private $maxPrice;
 
     /**
-     * @ORM\OneToMany(targetEntity=Plot::class, mappedBy="classifierId")
+     * @ORM\OneToMany(targetEntity=Plot::class, mappedBy="classifier")
      */
     private $plots;
 
@@ -97,7 +97,7 @@ class Classifier
     {
         if (!$this->plots->contains($plot)) {
             $this->plots[] = $plot;
-            $plot->setClassifierId($this);
+            $plot->setClassifier($this);
         }
 
         return $this;
@@ -108,8 +108,8 @@ class Classifier
         if ($this->plots->contains($plot)) {
             $this->plots->removeElement($plot);
             // set the owning side to null (unless already changed)
-            if ($plot->getClassifierId() === $this) {
-                $plot->setClassifierId(null);
+            if ($plot->getClassifier() === $this) {
+                $plot->setClassifier(null);
             }
         }
 

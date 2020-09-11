@@ -12,7 +12,7 @@ class Plot
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -26,16 +26,16 @@ class Plot
      * @ORM\ManyToOne(targetEntity=Source::class, inversedBy="plots")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $sourceId;
+    private $source;
 
     /**
      * @ORM\ManyToOne(targetEntity=Classifier::class, inversedBy="plots")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $classifierId;
+    private $classifier;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $announcementText;
 
@@ -43,20 +43,20 @@ class Plot
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="plots")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $categoryId;
+    private $category;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $permittedUse;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $permittedUseDoc;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $address;
 
@@ -64,50 +64,50 @@ class Plot
      * @ORM\ManyToOne(targetEntity=District::class, inversedBy="plots")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $districtId;
+    private $district;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $locality;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true, precision=20, scale=10)
      */
     private $price;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true, precision=20, scale=10)
      */
     private $area;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true, precision=20, scale=10)
      */
     private $unitPrice;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $cadastralNumber;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $urlLink;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable=true)
      */
     private $placementDate;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable=true)
      */
     private $relevanceDate;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $screenshotLink;
 
@@ -115,51 +115,51 @@ class Plot
      * @ORM\ManyToOne(targetEntity=Attribute::class, inversedBy="plots")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $attributeId;
+    private $attribute;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $commentAttribute;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Communication::class, inversedBy="plots")
+     * @ORM\ManyToOne(targetEntity=Communication::class, inversedBy="electricityPlots")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $electricityCommunicationId;
+    private $electricityCommunication;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Communication::class, inversedBy="plots")
+     * @ORM\ManyToOne(targetEntity=Communication::class, inversedBy="gasPlots")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $gasCommunicationId;
+    private $gasCommunication;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Communication::class, inversedBy="plots")
+     * @ORM\ManyToOne(targetEntity=Communication::class, inversedBy="waterPlots")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $waterCommunicationId;
+    private $waterCommunication;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Communication::class, inversedBy="plots")
+     * @ORM\ManyToOne(targetEntity=Communication::class, inversedBy="heatingPlots")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $heatingCommunicationId;
+    private $heatingCommunication;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Communication::class, inversedBy="plots")
+     * @ORM\ManyToOne(targetEntity=Communication::class, inversedBy="roadPlots")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $roadCommunicationId;
+    private $roadCommunication;
 
     /**
      * @ORM\ManyToOne(targetEntity=Bell::class, inversedBy="plots")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $bellId;
+    private $bell;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $commentProcessing;
 
@@ -167,26 +167,25 @@ class Plot
      * @ORM\ManyToOne(targetEntity=State::class, inversedBy="plots")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $stateId;
+    private $state;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="plots")
-     * @ORM\JoinColumn(nullable=false)
      */
-    private $userId;
+    private $performerUser;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $commentGeneral;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="lastSavePlots")
      */
-    private $lastSaveUser;
+    private $lastSavePerformerUser;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $processingDate;
 
@@ -207,26 +206,26 @@ class Plot
         return $this;
     }
 
-    public function getSourceId(): ?Source
+    public function getSource(): ?Source
     {
-        return $this->sourceId;
+        return $this->source;
     }
 
-    public function setSourceId(?Source $sourceId): self
+    public function setSource(?Source $source): self
     {
-        $this->sourceId = $sourceId;
+        $this->source = $source;
 
         return $this;
     }
 
-    public function getClassifierId(): ?Classifier
+    public function getClassifier(): ?Classifier
     {
-        return $this->classifierId;
+        return $this->classifier;
     }
 
-    public function setClassifierId(?Classifier $classifierId): self
+    public function setClassifier(?Classifier $classifier): self
     {
-        $this->classifierId = $classifierId;
+        $this->classifier = $classifier;
 
         return $this;
     }
@@ -236,21 +235,21 @@ class Plot
         return $this->announcementText;
     }
 
-    public function setAnnouncementText(string $announcementText): self
+    public function setAnnouncementText(?string $announcementText): self
     {
         $this->announcementText = $announcementText;
 
         return $this;
     }
 
-    public function getCategoryId(): ?Category
+    public function getCategory(): ?Category
     {
-        return $this->categoryId;
+        return $this->category;
     }
 
-    public function setCategoryId(?Category $categoryId): self
+    public function setCategory(?Category $category): self
     {
-        $this->categoryId = $categoryId;
+        $this->category = $category;
 
         return $this;
     }
@@ -260,7 +259,7 @@ class Plot
         return $this->permittedUse;
     }
 
-    public function setPermittedUse(string $permittedUse): self
+    public function setPermittedUse(?string $permittedUse): self
     {
         $this->permittedUse = $permittedUse;
 
@@ -272,7 +271,7 @@ class Plot
         return $this->permittedUseDoc;
     }
 
-    public function setPermittedUseDoc(string $permittedUseDoc): self
+    public function setPermittedUseDoc(?string $permittedUseDoc): self
     {
         $this->permittedUseDoc = $permittedUseDoc;
 
@@ -284,21 +283,21 @@ class Plot
         return $this->address;
     }
 
-    public function setAddress(string $address): self
+    public function setAddress(?string $address): self
     {
         $this->address = $address;
 
         return $this;
     }
 
-    public function getDistrictId(): ?District
+    public function getDistrict(): ?District
     {
-        return $this->districtId;
+        return $this->district;
     }
 
-    public function setDistrictId(?District $districtId): self
+    public function setDistrict(?District $district): self
     {
-        $this->districtId = $districtId;
+        $this->district = $district;
 
         return $this;
     }
@@ -308,7 +307,7 @@ class Plot
         return $this->locality;
     }
 
-    public function setLocality(string $locality): self
+    public function setLocality(?string $locality): self
     {
         $this->locality = $locality;
 
@@ -320,7 +319,7 @@ class Plot
         return $this->price;
     }
 
-    public function setPrice(float $price): self
+    public function setPrice(?float $price): self
     {
         $this->price = $price;
 
@@ -332,7 +331,7 @@ class Plot
         return $this->area;
     }
 
-    public function setArea(float $area): self
+    public function setArea(?float $area): self
     {
         $this->area = $area;
 
@@ -344,7 +343,7 @@ class Plot
         return $this->unitPrice;
     }
 
-    public function setUnitPrice(float $unitPrice): self
+    public function setUnitPrice(?float $unitPrice): self
     {
         $this->unitPrice = $unitPrice;
 
@@ -356,7 +355,7 @@ class Plot
         return $this->cadastralNumber;
     }
 
-    public function setCadastralNumber(string $cadastralNumber): self
+    public function setCadastralNumber(?string $cadastralNumber): self
     {
         $this->cadastralNumber = $cadastralNumber;
 
@@ -368,7 +367,7 @@ class Plot
         return $this->urlLink;
     }
 
-    public function setUrlLink(string $urlLink): self
+    public function setUrlLink(?string $urlLink): self
     {
         $this->urlLink = $urlLink;
 
@@ -380,7 +379,7 @@ class Plot
         return $this->placementDate;
     }
 
-    public function setPlacementDate(\DateTimeInterface $placementDate): self
+    public function setPlacementDate(?\DateTimeInterface $placementDate): self
     {
         $this->placementDate = $placementDate;
 
@@ -392,7 +391,7 @@ class Plot
         return $this->relevanceDate;
     }
 
-    public function setRelevanceDate(\DateTimeInterface $relevanceDate): self
+    public function setRelevanceDate(?\DateTimeInterface $relevanceDate): self
     {
         $this->relevanceDate = $relevanceDate;
 
@@ -404,21 +403,21 @@ class Plot
         return $this->screenshotLink;
     }
 
-    public function setScreenshotLink(string $screenshotLink): self
+    public function setScreenshotLink(?string $screenshotLink): self
     {
         $this->screenshotLink = $screenshotLink;
 
         return $this;
     }
 
-    public function getAttributeId(): ?Attribute
+    public function getAttribute(): ?Attribute
     {
-        return $this->attributeId;
+        return $this->attribute;
     }
 
-    public function setAttributeId(?Attribute $attributeId): self
+    public function setAttribute(?Attribute $attribute): self
     {
-        $this->attributeId = $attributeId;
+        $this->attribute = $attribute;
 
         return $this;
     }
@@ -428,81 +427,81 @@ class Plot
         return $this->commentAttribute;
     }
 
-    public function setCommentAttribute(string $commentAttribute): self
+    public function setCommentAttribute(?string $commentAttribute): self
     {
         $this->commentAttribute = $commentAttribute;
 
         return $this;
     }
 
-    public function getElectricityCommunicationId(): ?Communication
+    public function getElectricityCommunication(): ?Communication
     {
-        return $this->electricityCommunicationId;
+        return $this->electricityCommunication;
     }
 
-    public function setElectricityCommunicationId(?Communication $electricityCommunicationId): self
+    public function setElectricityCommunication(?Communication $electricityCommunication): self
     {
-        $this->electricityCommunicationId = $electricityCommunicationId;
+        $this->electricityCommunication = $electricityCommunication;
 
         return $this;
     }
 
-    public function getGasCommunicationId(): ?Communication
+    public function getGasCommunication(): ?Communication
     {
-        return $this->gasCommunicationId;
+        return $this->gasCommunication;
     }
 
-    public function setGasCommunicationId(?Communication $gasCommunicationId): self
+    public function setGasCommunication(?Communication $gasCommunication): self
     {
-        $this->gasCommunicationId = $gasCommunicationId;
+        $this->gasCommunication = $gasCommunication;
 
         return $this;
     }
 
-    public function getWaterCommunicationId(): ?Communication
+    public function getWaterCommunication(): ?Communication
     {
-        return $this->waterCommunicationId;
+        return $this->waterCommunication;
     }
 
-    public function setWaterCommunicationId(?Communication $waterCommunicationId): self
+    public function setWaterCommunication(?Communication $waterCommunication): self
     {
-        $this->waterCommunicationId = $waterCommunicationId;
+        $this->waterCommunication = $waterCommunication;
 
         return $this;
     }
 
-    public function getHeatingCommunicationId(): ?Communication
+    public function getHeatingCommunication(): ?Communication
     {
-        return $this->heatingCommunicationId;
+        return $this->heatingCommunication;
     }
 
-    public function setHeatingCommunicationId(?Communication $heatingCommunicationId): self
+    public function setHeatingCommunication(?Communication $heatingCommunication): self
     {
-        $this->heatingCommunicationId = $heatingCommunicationId;
+        $this->heatingCommunication = $heatingCommunication;
 
         return $this;
     }
 
-    public function getRoadCommunicationId(): ?Communication
+    public function getRoadCommunication(): ?Communication
     {
-        return $this->roadCommunicationId;
+        return $this->roadCommunication;
     }
 
-    public function setRoadCommunicationId(?Communication $roadCommunicationId): self
+    public function setRoadCommunication(?Communication $roadCommunication): self
     {
-        $this->roadCommunicationId = $roadCommunicationId;
+        $this->roadCommunication = $roadCommunication;
 
         return $this;
     }
 
-    public function getBellId(): ?Bell
+    public function getBell(): ?Bell
     {
-        return $this->bellId;
+        return $this->bell;
     }
 
-    public function setBellId(?Bell $bellId): self
+    public function setBell(?Bell $bell): self
     {
-        $this->bellId = $bellId;
+        $this->bell = $bell;
 
         return $this;
     }
@@ -512,33 +511,33 @@ class Plot
         return $this->commentProcessing;
     }
 
-    public function setCommentProcessing(string $commentProcessing): self
+    public function setCommentProcessing(?string $commentProcessing): self
     {
         $this->commentProcessing = $commentProcessing;
 
         return $this;
     }
 
-    public function getStateId(): ?State
+    public function getState(): ?State
     {
-        return $this->stateId;
+        return $this->state;
     }
 
-    public function setStateId(?State $stateId): self
+    public function setState(?State $state): self
     {
-        $this->stateId = $stateId;
+        $this->state = $state;
 
         return $this;
     }
 
-    public function getUserId(): ?User
+    public function getPerformerUser(): ?User
     {
-        return $this->userId;
+        return $this->performerUser;
     }
 
-    public function setUserId(?User $userId): self
+    public function setPerformerUser(?User $performerUser): self
     {
-        $this->userId = $userId;
+        $this->performerUser = $performerUser;
 
         return $this;
     }
@@ -548,21 +547,21 @@ class Plot
         return $this->commentGeneral;
     }
 
-    public function setCommentGeneral(string $commentGeneral): self
+    public function setCommentGeneral(?string $commentGeneral): self
     {
         $this->commentGeneral = $commentGeneral;
 
         return $this;
     }
 
-    public function getLastSaveUser(): ?string
+    public function getLastSavePerformerUser(): ?User
     {
-        return $this->lastSaveUser;
+        return $this->lastSavePerformerUser;
     }
 
-    public function setLastSaveUser(string $lastSaveUser): self
+    public function setLastSavePerformerUser(?User $lastSavePerformerUser): self
     {
-        $this->lastSaveUser = $lastSaveUser;
+        $this->lastSavePerformerUser = $lastSavePerformerUser;
 
         return $this;
     }
@@ -572,7 +571,7 @@ class Plot
         return $this->processingDate;
     }
 
-    public function setProcessingDate(\DateTimeInterface $processingDate): self
+    public function setProcessingDate(?\DateTimeInterface $processingDate): self
     {
         $this->processingDate = $processingDate;
 
