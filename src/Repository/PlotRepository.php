@@ -32,26 +32,24 @@ class PlotRepository extends ServiceEntityRepository
             ->addSelect(
                 'a.name attribute, b.name bell, ca.name category, cl.name classifier, coe.name eCommunic, '
                     . 'cow.name wCommunic, cog.name gCommunic, coh.name hCommunic, cor.name rCommunic, '
-                    . 'd.name district, so.name soucre, st.name state, u.lastName user, lsu.lastName lastSaveUser'
+                    . 'd.name district, so.name source, st.name state, u.lastName user, lsu.lastName lastSaveUser'
             )
             ->from('App\Entity\Plot', 'p')
-            ->join('App\Entity\Attribute', 'a', 'WITH', 'p.attribute = a.id')
-            ->join('App\Entity\Bell', 'b', 'WITH', 'p.bell = b.id')
-            ->join('App\Entity\Category', 'ca', 'WITH', 'p.category = ca.id')
-            ->join('App\Entity\Classifier', 'cl', 'WITH', 'p.classifier = cl.id')
-            ->join('App\Entity\Communication', 'coe', 'WITH', 'p.electricityCommunication = coe.id')
-            ->join('App\Entity\Communication', 'cow', 'WITH', 'p.waterCommunication = cow.id')
-            ->join('App\Entity\Communication', 'cog', 'WITH', 'p.gasCommunication = cog.id')
-            ->join('App\Entity\Communication', 'coh', 'WITH', 'p.heatingCommunication = coh.id')
-            ->join('App\Entity\Communication', 'cor', 'WITH', 'p.roadCommunication = cor.id')
-            ->join('App\Entity\District', 'd', 'WITH', 'p.district = d.id')
-            ->join('App\Entity\Source', 'so', 'WITH', 'p.source = so.id')
-            ->join('App\Entity\State', 'st', 'WITH', 'p.state = st.id')
-            ->join('App\Entity\User', 'u', 'WITH', 'p.performerUser = u.id')
-            ->join('App\Entity\User', 'lsu', 'WITH', 'p.lastSavePerformerUser = lsu.id')
-            ->orderBy('p.id')
-            ->getQuery()
-            ->getResult();
+            ->leftJoin('App\Entity\Attribute', 'a', 'WITH', 'p.attribute = a.id')
+            ->leftJoin('App\Entity\Bell', 'b', 'WITH', 'p.bell = b.id')
+            ->leftJoin('App\Entity\Category', 'ca', 'WITH', 'p.category = ca.id')
+            ->leftJoin('App\Entity\Classifier', 'cl', 'WITH', 'p.classifier = cl.id')
+            ->leftJoin('App\Entity\Communication', 'coe', 'WITH', 'p.electricityCommunication = coe.id')
+            ->leftJoin('App\Entity\Communication', 'cow', 'WITH', 'p.waterCommunication = cow.id')
+            ->leftJoin('App\Entity\Communication', 'cog', 'WITH', 'p.gasCommunication = cog.id')
+            ->leftJoin('App\Entity\Communication', 'coh', 'WITH', 'p.heatingCommunication = coh.id')
+            ->leftJoin('App\Entity\Communication', 'cor', 'WITH', 'p.roadCommunication = cor.id')
+            ->leftJoin('App\Entity\District', 'd', 'WITH', 'p.district = d.id')
+            ->leftJoin('App\Entity\Source', 'so', 'WITH', 'p.source = so.id')
+            ->leftJoin('App\Entity\State', 'st', 'WITH', 'p.state = st.id')
+            ->leftJoin('App\Entity\User', 'u', 'WITH', 'p.performerUser = u.id')
+            ->leftJoin('App\Entity\User', 'lsu', 'WITH', 'p.lastSavePerformerUser = lsu.id')
+            ->orderBy('p.id');
     }
 
     // /**
