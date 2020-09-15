@@ -1,116 +1,110 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-{# Header start #}
-  <header class="fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
-      <div class="navbar-brand d-flex align-items-center mb-0 h1">
-        <svg class="mr-2 fill-text-white" width="1em" height="1em">
-          <use xlink:href="#svg-database"></use>
-        </svg>
-        <span>МиАР</span>
-      </div>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Переключатель навигации">
-        <svg class="mt-n1 fill-text-white" width="1em" height="1em">
-          <use xlink:href="#svg-bars"></use>
-        </svg>
-      </button>
-      <div class="collapse navbar-collapse" id="menu">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item dropdown{% block nav_database %}{% endblock %}">
+
+<header class="fixed-top">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+		<div class="navbar-brand d-flex align-items-center mb-0 h1">
+			<svg class="mr-2 fill-text-white" width="1em" height="1em">
+				<use xlink:href="#svg-database"></use>
+			</svg>
+			<span>МиАР</span>
+		</div>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Переключатель навигации">
+			<svg class="mt-n1 fill-text-white" width="1em" height="1em">
+				<use xlink:href="#svg-bars"></use>
+			</svg>
+		</button>
+		<div class="collapse navbar-collapse" id="menu">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item dropdown{% block nav_database %}{% endblock %}">
+					<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+						<svg class="mr-1 mt-n1 fill-navbar" width="1em" height="1em">
+							<use xlink:href="#svg-server"></use>
+						</svg>
+						<span>База данных</span>
+					</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="{{ path('plot_index') }}">Земельные участки</a>
+						<a class="dropdown-item" href="{{ path('building_index') }}">Объекты капитального строительства</a>
+					</div>
+				</li>
+				{% if not is_granted('ROLE_GUEST') %}
+					<li class="nav-item dropdown{% block nav_new %}{% endblock %}">
 						<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
 							<svg class="mr-1 mt-n1 fill-navbar" width="1em" height="1em">
-								<use xlink:href="#svg-server"></use>
+								<use xlink:href="#svg-plus"></use>
 							</svg>
-							<span>База данных</span>
+							<span>Добавить объект</span>
 						</a>
 						<div class="dropdown-menu">
-							<a class="dropdown-item" href="{{ path('plot_index') }}">Земельные участки</a>
-							<a class="dropdown-item" href="{{ path('building_index') }}">Объекты капитального строительства</a>
+							<a class="dropdown-item" href="#">Земельный участок</a>
+							<a class="dropdown-item" href="#">Объект капитального строительства</a>
 						</div>
 					</li>
-					{% if not is_granted('ROLE_GUEST') %}
-						<li class="nav-item dropdown{% block nav_new %}{% endblock %}">
-							<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-								<svg class="mr-1 mt-n1 fill-navbar" width="1em" height="1em">
-									<use xlink:href="#svg-plus"></use>
-								</svg>
-								<span>Добавить объект</span>
-							</a>
-							<div class="dropdown-menu">
-								<a class="dropdown-item" href="#">Земельный участок</a>
-								<a class="dropdown-item" href="#">Объект капитального строительства</a>
-							</div>
-						</li>
-					{% endif %}
-					{% if is_granted('ROLE_ADMIN') %}
-						<li class="nav-item{% block nav_admin %}{% endblock %}">
-							<a class="nav-link" href="{{ path('admin_index') }}">
-								<svg class="mr-1 mt-n1 fill-navbar" width="1em" height="1em">
-									<use xlink:href="#svg-cog"></use>
-								</svg>
-								<span>Панель администратора</span>
-							</a>
-						</li>
-					{% endif %}
-				</ul>
-				<ul class="navbar-nav">
-					<li class="nav-item{% block nav_profile %}{% endblock %}">
-						<a class="nav-link" href="{{ path('profile_info') }}">
+				{% endif %}
+				{% if is_granted('ROLE_ADMIN') %}
+					<li class="nav-item{% block nav_admin %}{% endblock %}">
+						<a class="nav-link" href="{{ path('admin_index') }}">
 							<svg class="mr-1 mt-n1 fill-navbar" width="1em" height="1em">
-								<use xlink:href="#svg-user-alt"></use>
+								<use xlink:href="#svg-cog"></use>
 							</svg>
-							<span>{{ app.user.username }}</span>
+							<span>Панель администратора</span>
 						</a>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="{{ path('app_logout') }}">
-							<svg class="mr-1 mt-n1 fill-navbar" width="1em" height="1em">
-								<use xlink:href="#svg-sign-out-alt"></use>
-							</svg>
-							<span>Выйти</span>
-						</a>
-					</li>
-				</ul>
-			</div>
-		</nav>
-	</header>
-	{# Header end #}
-	{# Main start #}
-	<main class="mt-4 mb-4 pt-5">
-		<div class="container-fluid">
-			{# Alert start #}
-			{% for label, messages in app.flashes %}
-				{% for message in messages %}
-					<div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
-						<p class="mb-0">{{ message|raw }}</p>
-						<button type="button" class="close" data-dismiss="alert" aria-label="Закрыть">
-							<svg class="mt-n1 fill-alert-{{ label }}" width="1em" height="1em">
-								<use xlink:href="#svg-times"></use>
-							</svg>
-						</button>
-					</div>
-				{% endfor %}
-			{% endfor %}
-			{# Alert end #}
-			{# Content start #}
-			{% block content %}{% endblock %}
-			{# Content end #}
-		</div>
-	</main>
-	{# Main end #}
-	{# Footer start #}
-	<footer class="footer mt-auto">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-12 col-md-auto mr-auto">
-					<p class="text-muted">{{ include('partials/_copy.html.twig') }}</p>
-				</div>
-				<div class="col-12 col-md-auto">
-					<p class="text-muted">{{ include('partials/_version.html.twig') }}</p>
-				</div>
-			</div>
-		</div>
-	</footer>
-	{# Footer end #}
+				{% endif %}
+			</ul>
+			<ul class="navbar-nav">
+				<li class="nav-item{% block nav_profile %}{% endblock %}">
+          <a class="nav-link" href="{{ path('profile_info') }}">
+            <svg class="mr-1 mt-n1 fill-navbar" width="1em" height="1em">
+              <use xlink:href="#svg-user-alt"></use>
+            </svg>
+            <span>{{ app.user.username }}</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('app_logout') }}">
+            <svg class="mr-1 mt-n1 fill-navbar" width="1em" height="1em">
+              <use xlink:href="#svg-sign-out-alt"></use>
+            </svg>
+            <span>Выйти</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<main class="mt-4 mb-4 pt-5">
+  <div class="container-fluid">
+    {% for label, messages in app.flashes %}
+      {% for message in messages %}
+        <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
+          <p class="mb-0">{{ message|raw }}</p>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Закрыть">
+            <svg class="mt-n1 fill-alert-{{ label }}" width="1em" height="1em">
+              <use xlink:href="#svg-times"></use>
+            </svg>
+          </button>
+        </div>
+      {% endfor %}
+    {% endfor %}
+    {% block content %}{% endblock %}
+  </div>
+</main>
+
+<footer class="footer mt-auto">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-md-auto mr-auto">
+        <p class="text-muted">{{ include('partials/_copy.html.twig') }}</p>
+      </div>
+      <div class="col-12 col-md-auto">
+        <p class="text-muted">{{ include('partials/_version.html.twig') }}</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
 {% endblock %}

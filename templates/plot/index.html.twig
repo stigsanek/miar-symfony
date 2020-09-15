@@ -6,7 +6,7 @@
 {% block content %}
 	<h1 class="sr-only">Земельные участки</h1>
 	<div class="row">
-		{# Page menu start #}
+
 		<section class="col-12 d-flex flex-wrap">
 			<h2 class="sr-only">Меню страницы</h2>
 			<ul class="nav mr-auto">
@@ -27,29 +27,28 @@
 					</a>
 				</li>
 			</ul>
-      <div class="d-flex flex-wrap">
-        <span class="nav-link text-muted">Сортировать по:</span>
-        <ul class="nav">
-          <li class="nav-item">
-            <div class="nav-link">{{ knp_pagination_sortable(pagination, '#', 'p.id') }}</div>
-          </li>
-          <li class="nav-item">
-            <div class="nav-link">{{ knp_pagination_sortable(pagination, 'Общая цена', 'p.price') }}</div>
-          </li>
-          <li class="nav-item">
-            <div class="nav-link">{{ knp_pagination_sortable(pagination, 'Площадь', 'p.area') }}</div>
-          </li>
-          <li class="nav-item">
-            <div class="nav-link">{{ knp_pagination_sortable(pagination, 'Цена за 1 кв.м.', 'p.unitPrice') }}</div>
-          </li>
-          <li class="nav-item">
-            <div class="nav-link">{{ knp_pagination_sortable(pagination, 'Дата актуальности', 'p.relevanceDate') }}</div>
-          </li>
-        </ul>
-      </div>
+			<div class="d-flex flex-wrap">
+				<span class="nav-link text-muted">Сортировать по:</span>
+				<ul class="nav">
+					<li class="nav-item">
+						<div class="nav-link">{{ knp_pagination_sortable(pagination, '#', 'p.id') }}</div>
+					</li>
+					<li class="nav-item">
+						<div class="nav-link">{{ knp_pagination_sortable(pagination, 'Общая цена', 'p.price') }}</div>
+					</li>
+					<li class="nav-item">
+						<div class="nav-link">{{ knp_pagination_sortable(pagination, 'Площадь', 'p.area') }}</div>
+					</li>
+					<li class="nav-item">
+						<div class="nav-link">{{ knp_pagination_sortable(pagination, 'Цена за 1 кв.м.', 'p.unitPrice') }}</div>
+					</li>
+					<li class="nav-item">
+						<div class="nav-link">{{ knp_pagination_sortable(pagination, 'Дата актуальности', 'p.relevanceDate') }}</div>
+					</li>
+				</ul>
+			</div>
 		</section>
-		{# Page menu end #}
-		{# Table start #}
+
 		<section class="col-12 mb-3">
 			<h2 class="sr-only">Таблица с объектами</h2>
 			<div class="table-container">
@@ -108,8 +107,16 @@
 				</table>
 			</div>
 		</section>
-		{# Table end #}
-		{# Pagination start #}
+
+		<section class="col-12">
+			<h2 class="sr-only">Информация</h2>
+			<div class="d-flex flex-wrap flex-column flex-sm-row text-muted">
+				<p class="mr-3">Мин. = {{ unit_prices.minPrice | format_number({fraction_digit: 2}) }} руб/м<sup>2</sup></p>
+				<p class="mr-3">Средн. = {{ unit_prices.avgPrice | format_number({fraction_digit: 2}) }} руб/м<sup>2</sup></p>
+				<p class="mr-auto">Макс. = {{ unit_prices.maxPrice | format_number({fraction_digit: 2}) }} руб/м<sup>2</sup></p>
+			</div>
+		</section>
+
 		<section class="col-12">
 			<h2 class="sr-only">Пагинация</h2>
 			<div class="d-flex flex-wrap flex-column flex-sm-row align-items-baseline text-muted">
@@ -125,6 +132,6 @@
 				<p>Всего: {{ pagination.getTotalItemCount }}</p>
 			</div>
 		</section>
-		{# Pagination end #}
+
 	</div>
 {% endblock %}

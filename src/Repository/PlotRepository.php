@@ -52,6 +52,15 @@ class PlotRepository extends ServiceEntityRepository
             ->orderBy('p.id');
     }
 
+    public function findUnitPriceValues()
+    {
+        return $this->getEntityManager()->createQuery('
+            SELECT MIN(p.unitPrice) minPrice, AVG(p.unitPrice) avgPrice, MAX(p.unitPrice) maxPrice
+            FROM App\Entity\Plot p
+        ')
+            ->getOneOrNullResult();
+    }
+
     // /**
     //  * @return Plot[] Returns an array of Plot objects
     //  */

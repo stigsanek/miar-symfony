@@ -24,7 +24,8 @@ class PlotController extends AbstractController
         );
 
         return $this->render('plot/index.html.twig', [
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'unit_prices' => $repository->findUnitPriceValues()
         ]);
     }
 
