@@ -10,7 +10,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PlotController extends AbstractController
 {
-    private const PAGE_LIMIT = 10;
+    /**
+     * Default row limit
+     */
+    private const ROW_LIMIT = 10;
 
     /**
      * @Route("/plots", name="plot_index")
@@ -20,7 +23,7 @@ class PlotController extends AbstractController
         $pagination = $paginator->paginate(
             $repository->findAllWithJoin(),
             $request->query->getInt('page', 1),
-            self::PAGE_LIMIT
+            $request->query->get('limit') ?? self::ROW_LIMIT
         );
 
         return $this->render('plot/index.html.twig', [

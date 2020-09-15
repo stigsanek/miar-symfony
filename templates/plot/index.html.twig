@@ -123,12 +123,17 @@
 				<div class="font-weight-bold mr-auto">
 					{{ knp_pagination_render(pagination) }}
 				</div>
-				<p class="mr-3">Отображать на странице:
-					<a href="#">5</a>
-					<a href="#">10</a>
-					<a href="#">20</a>
-					<a href="#">50</a>
-				</p>
+        <form class="mr-3 d-flex align-items-baseline">
+          <p class="mr-1">Отображать на странице</p>
+					<div class="form-group">
+						<label class="sr-only" for="limit">Отображать на странице</label>
+            <select class="form-control selectpicker" id="limit" name="database">
+              {% for item in [10, 20, 30, 40, 50] %}
+                <option value="{{ item }}" {% if app.request.get('limit') == item %}selected{% endif %}>{{ item }}</option>
+              {% endfor %}
+						</select>
+					</div>
+        </form>
 				<p>Всего: {{ pagination.getTotalItemCount }}</p>
 			</div>
 		</section>
