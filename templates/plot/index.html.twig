@@ -1,16 +1,110 @@
 {% extends 'layout/layout.html.twig' %}
 
-{% block title %}Hello PlotController!{% endblock %}
+{% block title %}Земельные участки · МиАР{% endblock %}
 {% block nav_database %} active{% endblock %}
 
 {% block content %}
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/aleksandregorov/Desktop/Projects/miar-symfony/src/Controller/PlotController.php'|file_link(0) }}">src/Controller/PlotController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/aleksandregorov/Desktop/Projects/miar-symfony/templates/plot/index.html.twig'|file_link(0) }}">templates/plot/index.html.twig</a></code></li>
-    </ul>
-</div>
+	<h1 class="sr-only">Земельные участки</h1>
+	<div class="row">
+		{# Page menu start #}
+		<section class="col-12">
+			<h2 class="sr-only">Меню страницы</h2>
+			<ul class="nav">
+				<li class="nav-item">
+					<a class="nav-link" href="#filter" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="filter">
+						<svg class="mr-1 mt-n1 fill-text-primary" width="1em" height="1em">
+							<use xlink:href="#svg-filter"></use>
+						</svg>
+						<span>Фильтр</span>
+					</a>
+				</li>
+				<li class="nav-item d-none d-lg-block">
+					<a class="nav-link" href="#">
+						<svg class="mr-1 mt-n1 fill-text-primary" width="1em" height="1em">
+							<use xlink:href="#svg-file-excel"></use>
+						</svg>
+						<span>Экспорт</span>
+					</a>
+				</li>
+			</ul>
+		</section>
+		{# Page menu end #}
+		{# Table start #}
+		<section class="col-12 mb-3">
+			<h2 class="sr-only">Таблица с объектами</h2>
+			<div class="table-container">
+				<table class="table table-bordered table-striped table-hover main-table">
+					<caption class="sr-only">Список объектов</caption>
+					<thead class="bg-secondary text-center text-white">
+						<tr>
+							<th class="align-middle td-100" scope="col">Действие</th>
+							<th class="align-middle td-70" scope="col">#</th>
+							<th class="align-middle td-130" scope="col">Источник</th>
+							<th class="align-middle td-180" scope="col">Классификатор</th>
+							<th class="align-middle td-200" scope="col">Категория</th>
+							<th class="align-middle td-300" scope="col">ВРИ</th>
+							<th class="align-middle td-300" scope="col">ВРИ (по документу)</th>
+							<th class="align-middle td-180" scope="col">Район</th>
+							<th class="align-middle td-160" scope="col">Общая цена, руб.</th>
+							<th class="align-middle td-140" scope="col">Площадь, кв.м.</th>
+							<th class="align-middle td-180" scope="col">Цена за 1 кв.м., руб.</th>
+							<th class="align-middle td-180" scope="col">Кадастровый номер</th>
+							<th class="align-middle td-170" scope="col">Дата актуальности</th>
+							<th class="align-middle td-110" scope="col">Признак</th>
+							<th class="align-middle td-300" scope="col">Комменатрий</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for plot in pagination %}
+							<tr class="row-height">
+								<th class="align-middle text-center" scope="row">
+									<a href="{{ path('plot_item', {id: plot.id}) }}" aria-label="Редактировать объект">
+										<svg class="mt-n1 fill-text-primary" width="1em" height="1em">
+											<use xlink:href="#svg-edit"></use>
+										</svg>
+									</a>
+								</th>
+								<td class="align-middle text-center">{{ plot.id }}</td>
+								<td class="align-middle">{{ plot.source }}</td>
+								<td class="align-middle">{{ plot.classifier }}</td>
+								<td class="align-middle">{{ plot.category | slice(0, 45) }}</td>
+								<td class="align-middle">{{ plot.permittedUse | slice(0, 45) }}</td>
+								<td class="align-middle">{{ plot.permittedUseDoc | slice(0, 45) }}</td>
+								<td class="align-middle">{{ plot.district }}</td>
+								<td class="align-middle text-center">{{ plot.price | format_number({fraction_digit: 2}) }}</td>
+								<td class="align-middle text-center">{{ plot.area | format_number({fraction_digit: 2}) }}</td>
+								<td class="align-middle text-center">{{ plot.unitPrice | format_number({fraction_digit: 2}) }}</td>
+								<td class="align-middle text-center">
+									<a href="https://pkk.rosreestr.ru/#/?text={{ plot.cadastralNumber }}&type=1&app=search" rel="noreferrer" target="_blank">
+										{{ plot.cadastralNumber }}
+									</a>
+								</td>
+								<td class="align-middle text-center">{{ plot.relevanceDate | date("d.m.Y") }}</td>
+								<td class="align-middle">{{ plot.attribute }}</td>
+								<td class="align-middle">{{ plot.commentAttribute | slice(0, 45) }}</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</section>
+		{# Table end #}
+		{# Pagination start #}
+		<section class="col-12">
+			<h2 class="sr-only">Пагинация</h2>
+			<div class="d-flex flex-wrap flex-column flex-sm-row align-items-baseline text-muted">
+				<div class="font-weight-bold mr-auto">
+					{{ knp_pagination_render(pagination) }}
+				</div>
+				<p class="mr-3">Отображать на странице:
+					<a href="#">5</a>
+					<a href="#">10</a>
+					<a href="#">20</a>
+					<a href="#">50</a>
+				</p>
+				<p>Всего: {{ pagination.getTotalItemCount }}</p>
+			</div>
+		</section>
+		{# Pagination end #}
+	</div>
 {% endblock %}

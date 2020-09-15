@@ -1,0 +1,52 @@
+.table-container {
+  overflow-x: auto;
+}
+
+.main-table {
+  width: 2700px;
+  margin: 0 auto;
+}
+
+.row-height {
+  height: 85px;
+}
+
+.td-70 {
+  width: 70px;
+}
+
+.td-100 {
+  width: 100px;
+}
+
+.td-110 {
+  width: 110px;
+}
+
+.td-130 {
+  width: 130px;
+}
+
+.td-140 {
+  width: 140px;
+}
+
+.td-160 {
+  width: 160px;
+}
+
+.td-170 {
+  width: 170px;
+}
+
+.td-180 {
+  width: 180px;
+}
+
+.td-200 {
+  width: 200px;
+}
+
+.td-300 {
+  width: 300px;
+}
