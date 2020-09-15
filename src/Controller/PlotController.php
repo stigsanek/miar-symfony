@@ -41,12 +41,12 @@ class PlotController extends AbstractController
      */
     public function runExport(PlotRepository $repository, Request $request)
     {
-        // $exporter = new Exporter(
-        //     $repository->findAllForExport(),
-        //     'plots'
-        // );
+        $exporter = new Exporter(
+            $repository->findAllForExport(),
+            'plots'
+        );
 
-        // $exporter->export();
+        $exporter->export();
 
         return $this->redirectToRoute('plot_index', $request->query->all());
     }

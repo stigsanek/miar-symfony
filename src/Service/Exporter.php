@@ -24,6 +24,8 @@ class Exporter
 
     public function export()
     {
+        ini_set('memory_limit', '-1'); // For export large amount of data
+
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
 
