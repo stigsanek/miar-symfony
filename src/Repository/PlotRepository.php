@@ -20,9 +20,9 @@ class PlotRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Plot[] Returns an array of Plot objects
+     * @return QueryBuilder Returns an QueryBuilder with the request text
      */
-    public function findAllWithJoin()
+    public function findAllWithJoin(): object
     {
         return $this->getEntityManager()->createQueryBuilder()->select(
             'p.id, p.identifier, p.announcementText, p.permittedUse, p.permittedUseDoc, p.address, p.locality, '
@@ -52,7 +52,12 @@ class PlotRepository extends ServiceEntityRepository
             ->orderBy('p.id');
     }
 
-    public function findUnitPriceValues()
+    public function findAllForExport(): array
+    {
+        return $this->findAllWithJoin()->getQuery()->getResult();
+    }
+
+    public function findUnitPriceValues(): array
     {
         return $this->getEntityManager()->createQuery('
             SELECT MIN(p.unitPrice) minPrice, AVG(p.unitPrice) avgPrice, MAX(p.unitPrice) maxPrice

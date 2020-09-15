@@ -2,12 +2,16 @@
 
 namespace App\Controller;
 
+use App\Service\Exporter;
 use App\Repository\PlotRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/plots")
+ */
 class PlotController extends AbstractController
 {
     /**
@@ -16,7 +20,7 @@ class PlotController extends AbstractController
     private const ROW_LIMIT = 10;
 
     /**
-     * @Route("/plots", name="plot_index")
+     * @Route("/", name="plot_index")
      */
     public function getAll(PlotRepository $repository, PaginatorInterface $paginator, Request $request)
     {
@@ -33,7 +37,22 @@ class PlotController extends AbstractController
     }
 
     /**
-     * @Route("/plots/{id}", name="plot_item")
+     * @Route("/export", name="plot_export")
+     */
+    public function runExport(PlotRepository $repository, Request $request)
+    {
+        // $exporter = new Exporter(
+        //     $repository->findAllForExport(),
+        //     'plots'
+        // );
+
+        // $exporter->export();
+
+        return $this->redirectToRoute('plot_index', $request->query->all());
+    }
+
+    /**
+     * @Route("/{id}", name="plot_item")
      */
     public function getItem($id)
     {
