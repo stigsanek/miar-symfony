@@ -1,0 +1,18 @@
+<a {% for attr, value in options %} {{ attr }}="{{ value }}" {% endfor %}>
+	{% if sorted %}
+		{% if direction == 'desc' %}
+			<svg class="mr-1 mt-n1 fill-text-primary" width="1em" height="1em">
+				<use xlink:href="#svg-sort-down"></use>
+			</svg>
+		{% else %}
+			<svg class="mr-1 mt-n1 fill-text-primary" width="1em" height="1em">
+				<use xlink:href="#svg-sort-up"></use>
+			</svg>
+		{% endif %}
+	{% else %}
+		<svg class="mr-1 mt-n1 fill-text-primary" width="1em" height="1em">
+			<use xlink:href="#svg-sort"></use>
+		</svg>
+	{% endif %}
+	<span>{{ title }}</span>
+</a>

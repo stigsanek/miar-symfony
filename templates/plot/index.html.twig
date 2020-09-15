@@ -7,9 +7,9 @@
 	<h1 class="sr-only">Земельные участки</h1>
 	<div class="row">
 		{# Page menu start #}
-		<section class="col-12">
+		<section class="col-12 d-flex flex-wrap">
 			<h2 class="sr-only">Меню страницы</h2>
-			<ul class="nav">
+			<ul class="nav mr-auto">
 				<li class="nav-item">
 					<a class="nav-link" href="#filter" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="filter">
 						<svg class="mr-1 mt-n1 fill-text-primary" width="1em" height="1em">
@@ -27,6 +27,26 @@
 					</a>
 				</li>
 			</ul>
+      <div class="d-flex flex-wrap">
+        <span class="nav-link text-muted">Сортировать по:</span>
+        <ul class="nav">
+          <li class="nav-item">
+            <div class="nav-link">{{ knp_pagination_sortable(pagination, '#', 'p.id') }}</div>
+          </li>
+          <li class="nav-item">
+            <div class="nav-link">{{ knp_pagination_sortable(pagination, 'Общая цена', 'p.price') }}</div>
+          </li>
+          <li class="nav-item">
+            <div class="nav-link">{{ knp_pagination_sortable(pagination, 'Площадь', 'p.area') }}</div>
+          </li>
+          <li class="nav-item">
+            <div class="nav-link">{{ knp_pagination_sortable(pagination, 'Цена за 1 кв.м.', 'p.unitPrice') }}</div>
+          </li>
+          <li class="nav-item">
+            <div class="nav-link">{{ knp_pagination_sortable(pagination, 'Дата актуальности', 'p.relevanceDate') }}</div>
+          </li>
+        </ul>
+      </div>
 		</section>
 		{# Page menu end #}
 		{# Table start #}
